@@ -19,7 +19,4 @@ public interface PeliculaRepository extends JpaRepository<Pelicula, Integer>{
 	List<Pelicula> findAll();
 	
 	List<Pelicula> findById(int idPelicula);
-
-	@Query("SELECT p FROM Pelicula p")
-	List<Pelicula> obtenerRegistrosParaExportar();
 }

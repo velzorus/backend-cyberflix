@@ -62,10 +62,6 @@ public class PeliculaService {
 		return repoPelicula.findByAnio(anio);
 	}
 	
-	public List<Pelicula> obtenerRegistrosParaExportar() {
-	    return repoPelicula.obtenerRegistrosParaExportar();
-	}
-	
 	public InputStream getPeliculaReport(List<Pelicula> peliculas, Map<String, Object> parameters) throws JRException {
 	    List<PeliculaReport> listData = new ArrayList<PeliculaReport>();
 	    listData.add(new PeliculaReport(peliculas));

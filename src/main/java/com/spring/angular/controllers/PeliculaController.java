@@ -165,32 +165,6 @@ public class PeliculaController {
 	    }
 	}
 	
-	@GetMapping("/pelicula/pelicula_report_pdf")
-	public ResponseEntity<ByteArrayResource> generateAllRegistrosPdf() throws IOException, JRException {
-	    List<Pelicula> allPeliculas = serviPelicula.listarPeliculas(); // Obtener todas las películas
-
-	    // Verificar si hay películas para generar el informe
-	    if (allPeliculas.isEmpty()) {
-	        // Manejar el caso en el que no hay películas disponibles, por ejemplo, lanzar una excepción o mostrar un mensaje de error.
-	        // Aquí se muestra cómo devolver una respuesta vacía con un código de estado 204 (No Content).
-	        return ResponseEntity.noContent().build();
-	    }
-
-	    Map<String, Object> parameters = new HashMap<>();
-	    parameters.put("IMAGE_PATH", "https://drive.google.com/uc?export=view&id=166I4OhtsyyVzl5IRn74q1VM9WMwpzqmp");
-
-	    InputStream pdfStream = serviPelicula.getPeliculaReport(allPeliculas, parameters);
-	    byte[] data = pdfStream.readAllBytes();
-	    pdfStream.close();
-
-	    HttpHeaders headers = new HttpHeaders();
-	    headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=reporte_peliculas.pdf");
-	    headers.setContentType(MediaType.APPLICATION_PDF);
-	    headers.setContentLength(data.length);
-
-	    return ResponseEntity.ok().headers(headers).body(new ByteArrayResource(data));
-	}
-	
 	/* Busca películas por el ID de género. */
 	@GetMapping("/buscar/genero")
 	public ResponseEntity<List<Pelicula>> findByPeliculaGeneroIdGenero(@RequestParam int codGenero) {
